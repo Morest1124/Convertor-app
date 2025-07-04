@@ -1,8 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     margin: 10px;
     padding: 10px;
     background-color: #f4f4f4;
+    letter-spacing: 0.01em;
 }
 
 .container {
@@ -22,6 +23,18 @@ h1 {
     margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+label, p, li, input, button {
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    font-size: 1.07em;
+    line-height: 1.6;
+}
+
 form {
     background: #ffffff;
     padding: 20px;
@@ -31,7 +44,10 @@ form {
 
 input[type="file"],
 input[type="text"],
-input[type="submit"] {
+input[type="submit"], button[type="submit"] {
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    font-size: 1em;
+    letter-spacing: 0.02em;
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -39,15 +55,51 @@ input[type="submit"] {
     border-radius: 5px;
 }
 
-input[type="submit"] {
-    background: #232c31;
-    color: #ffffff;
-    border: 2px solid rgb(11, 11, 61);
+input[type="submit"], button[type="submit"] {
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+    transition: background 0.2s, transform 0.1s;
+    padding: 10px 0;
 }
 
-input[type="submit"]:hover {
-    background: #45a049;
+input[type="submit"]:hover, button[type="submit"]:hover {
+    background: linear-gradient(90deg, #4f46e5 0%, #2563eb 100%);
+    transform: translateY(-2px);
+}
+
+/* Stylish toggle/select for contact mode */
+#mode_toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    background: linear-gradient(90deg, #e0e7ff 0%, #c7d2fe 100%);
+    color: #3730a3;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    padding: 10px 36px 10px 14px;
+    border: 2px solid #6366f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 6l4 4 4-4' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px 18px;
+}
+
+#mode_toggle:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px #a5b4fc;
 }
 
 footer {
@@ -58,4 +110,22 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 98%;
+        padding: 0 2px;
+    }
+    input[type="file"],
+    input[type="text"],
+    input[type="submit"], 
+    button[type="submit"],
+    select {
+        width: 100vw;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-left: -8px;
+        margin-right: -8px;
+    }
 }

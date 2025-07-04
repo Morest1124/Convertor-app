@@ -9,18 +9,80 @@
 <body>
     <div class="container">
         <h1>CSV to VCF Converter</h1>
+        <p>
+            This website converts your CSV contacts into a VCF (vCard) file for easy import into your phone or email contacts.<br>
+            <strong>Instructions:</strong>
+            <ol>
+                <li>Prepare a CSV file with your contacts. Supported columns: <b>Name</b>, <b>Surname</b>, <b>Phone</b>, <b>Email</b>. You can include any or all of these.</li>
+                <li>Upload your CSV file below.</li>
+                <li>
+                    Choose your contact mode:
+                    <ul>
+                        <li><b>Use Single Name for All Contacts</b>: All contacts will use the name you provide, and phone numbers will be taken from the CSV.</li>
+                        <li><b>CSV Has Name, Surname, Phone, Email</b>: The app will detect and use names, surnames, phone numbers, and emails from your CSV. If only emails are present, it will create email-only contacts. If only names/surnames are present, it will create name-only contacts. Empty rows are ignored.</li>
+                    </ul>
+                </li>
+                <li>Optionally enter a country code (used for phone numbers, leave blank if not needed).</li>
+                <li>Click "Convert" to download your VCF file.</li>
+            </ol>
+        </p>
         <form action="/convert" method="post" enctype="multipart/form-data">
             <label for="csv_file">Upload CSV File:</label>
             <input type="file" id="csv_file" name="csv_file" accept=".csv" required>
 
-            <label for="contact_name">Contact Name:</label>
-            <input type="text" id="contact_name" name="contact_name" required>
+            <div style="margin: 12px 0;">
+                <label for="mode_toggle" style="font-weight:600;">Contact Mode:</label>
+                <select id="mode_toggle" name="mode_toggle" required>
+                    <option value="single">Use Single Name for All Contacts</option>
+                    <option value="csv">CSV Has Name, Surname, Phone, Email</option>
+                </select>
+            </div>
+
+            <div id="single_name_fields">
+                <label for="contact_name">Contact Name:</label>
+                <input type="text" id="contact_name" name="contact_name">
+            </div>
 
             <label for="country_code">Country Code:</label>
-            <input type="text" id="country_code" name="country_code" required>
+            <input type="text" id="country_code" name="country_code">
 
             <button type="submit">Convert</button>
         </form>
+        <script>
+            // Toggle contact name field based on mode
+            const modeToggle = document.getElementById('mode_toggle');
+            const singleNameFields = document.getElementById('single_name_fields');
+            modeToggle.addEventListener('change', function() {
+                if (this.value === 'single') {
+                    singleNameFields.style.display = 'block';
+                    document.getElementById('contact_name').required = true;
+                } else {
+                    singleNameFields.style.display = 'none';
+                    document.getElementById('contact_name').required = false;
+                }
+            });
+            // Initialize on page load
+            if (modeToggle.value === 'csv') {
+                singleNameFields.style.display = 'none';
+                document.getElementById('contact_name').required = false;
+            }
+        </script>
+        <div class="donation-section" style="margin-top: 24px; text-align: center;">
+            <p>If you find this tool helpful, consider supporting me:</p>
+            <!-- Buy Me a Coffee Button 
+            <a href="coff.ee/morestbura5" target="_blank">
+                <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 45px; width: 162px;">
+            </a> Or use PayPal -->
+            
+            <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline;">
+                <input type="hidden" name="business" value="morest1124burawa2005@gmail.com" />
+                <input type="hidden" name="no_recurring" value="0" />
+                <input type="hidden" name="item_name" value="Support the CSV to VCF Converter project!" />
+                <input type="hidden" name="currency_code" value="USD" />
+                <input type="submit" value="Donate with PayPal" style="background:#ffc439;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;">
+            </form>
+            
+        </div>
     </div>
 </body>
 </html>
